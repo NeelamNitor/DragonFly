@@ -121,6 +121,11 @@ export class RoomComponent implements OnInit {
 
   protected async leave(): Promise<void> {
     this.leaveRoom(true);
+    // Browsers only allow a page to close a tab it opened itself via script
+    // (e.g. window.open()); a tab reached by typing/clicking a normal link
+    // can't be force-closed and this silently no-ops there — the navigate
+    // below is what actually runs in that (common) case.
+    window.close();
     await this.router.navigate(['/']);
   }
 
