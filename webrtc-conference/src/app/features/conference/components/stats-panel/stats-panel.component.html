@@ -1,0 +1,32 @@
+<aside class="stats-panel">
+  <h2 class="stats-panel__title">Connection stats</h2>
+
+  @if (rows().length === 0) {
+    <p class="stats-panel__empty">No active peer connections yet.</p>
+  }
+
+  @for (row of rows(); track row.participantId) {
+    <div class="stats-panel__row">
+      <div class="stats-panel__name">
+        {{ row.displayName }}
+        <span class="stats-panel__quality" [attr.data-quality]="classify(row)">{{ classify(row) }}</span>
+      </div>
+      <dl class="stats-panel__grid">
+        <dt>RTT</dt>
+        <dd>{{ row.roundTripTimeMs ?? '—' }} ms</dd>
+        <dt>Packet loss</dt>
+        <dd>{{ row.packetLossPercent }}%</dd>
+        <dt>Jitter</dt>
+        <dd>{{ row.jitterMs }} ms</dd>
+        <dt>Down / Up</dt>
+        <dd>{{ row.inboundBitrateKbps }} / {{ row.outboundBitrateKbps }} kbps</dd>
+        <dt>Resolution</dt>
+        <dd>{{ row.resolution ? row.resolution.width + '×' + row.resolution.height : '—' }}</dd>
+        <dt>Frame rate</dt>
+        <dd>{{ row.frameRate ?? '—' }} fps</dd>
+        <dt>Codec</dt>
+        <dd>{{ row.codec ?? '—' }}</dd>
+      </dl>
+    </div>
+  }
+</aside>

@@ -1,0 +1,75 @@
+<div class="lobby">
+  <div class="lobby__card">
+    <h1 class="lobby__title">Start or join a meeting</h1>
+
+    <div class="lobby__preview">
+      <video #previewVideo autoplay playsinline muted class="lobby__video"></video>
+
+      @if (!media.videoEnabled()) {
+        <div class="lobby__video-off">Camera off</div>
+      }
+
+      <div class="lobby__preview-controls">
+        <button
+          type="button"
+          class="icon-btn"
+          [class.icon-btn--off]="!media.audioEnabled()"
+          (click)="media.toggleAudio()"
+          [attr.aria-pressed]="media.audioEnabled()"
+          title="Toggle microphone"
+        >
+          {{ media.audioEnabled() ? '🎤' : '🔇' }}
+        </button>
+        <button
+          type="button"
+          class="icon-btn"
+          [class.icon-btn--off]="!media.videoEnabled()"
+          (click)="media.toggleVideo()"
+          [attr.aria-pressed]="media.videoEnabled()"
+          title="Toggle camera"
+        >
+          {{ media.videoEnabled() ? '📷' : '🚫' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="lobby__devices">
+      <label class="field">
+        <span>Microphone</span>
+        <select (change)="onAudioDeviceChange($event)">
+          @for (device of media.audioInputDevices(); track device.deviceId) {
+            <option [value]="device.deviceId">{{ device.label || 'Microphone' }}</option>
+          }
+        </select>
+      </label>
+      <label class="field">
+        <span>Camera</span>
+        <select (change)="onVideoDeviceChange($event)">
+          @for (device of media.videoInputDevices(); track device.deviceId) {
+            <option [value]="device.deviceId">{{ device.label || 'Camera' }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    <form class="lobby__form" [formGroup]="form" (ngSubmit)="join()">
+      <label class="field">
+        <span>Your name</span>
+        <input type="text" formControlName="displayName" placeholder="Jane Doe" autocomplete="name" />
+        @if (form.controls.displayName.invalid && form.controls.displayName.touched) {
+          <small class="field__error">Enter at least 2 characters.</small>
+        }
+      </label>
+
+      <label class="field">
+        <span>Room code</span>
+        <div class="field__row">
+          <input type="text" formControlName="roomId" placeholder="room-code" autocomplete="off" />
+          <button type="button" class="btn btn--ghost" (click)="regenerateRoomCode()">New</button>
+        </div>
+      </label>
+
+      <button type="submit" class="btn btn--primary" [disabled]="form.invalid">Join meeting</button>
+    </form>
+  </div>
+</div>

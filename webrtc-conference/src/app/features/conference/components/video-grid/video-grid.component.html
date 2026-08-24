@@ -1,0 +1,7 @@
+<div class="video-grid" [style.--grid-columns]="columns()">
+  @for (participant of participants(); track participant.id) {
+    <app-participant-tile [participant]="participant" />
+  } @empty {
+    <div class="video-grid__empty">Waiting for others to join…</div>
+  }
+</div>

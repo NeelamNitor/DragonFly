@@ -1,0 +1,23 @@
+<div class="room">
+  <div class="room__body">
+    <app-video-grid class="room__grid" [participants]="store.participants()" />
+
+    @if (store.isStatsPanelOpen()) {
+      <app-stats-panel [stats]="stats.statsByParticipant()" [participants]="store.participants()" />
+    }
+  </div>
+
+  <app-controls-bar
+    [audioEnabled]="media.audioEnabled()"
+    [videoEnabled]="media.videoEnabled()"
+    [isScreenSharing]="media.isScreenSharing()"
+    [isStatsPanelOpen]="store.isStatsPanelOpen()"
+    [signalingStatus]="signalingConnection().status"
+    [participantCount]="store.participantCount()"
+    (toggleAudio)="toggleAudio()"
+    (toggleVideo)="toggleVideo()"
+    (toggleScreenShare)="toggleScreenShare()"
+    (toggleStats)="toggleStats()"
+    (leave)="leave()"
+  />
+</div>

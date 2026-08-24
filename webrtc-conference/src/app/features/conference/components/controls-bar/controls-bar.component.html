@@ -1,0 +1,56 @@
+<div class="controls">
+  <div class="controls__meta">
+    <span class="controls__status" [class]="'controls__status--' + signalingStatus()">
+      {{ signalingStatus() }}
+    </span>
+    <span class="controls__count">{{ participantCount() }} in room</span>
+  </div>
+
+  <div class="controls__buttons">
+    <button
+      type="button"
+      class="icon-btn"
+      [class.icon-btn--off]="!audioEnabled()"
+      (click)="toggleAudio.emit()"
+      [attr.aria-pressed]="audioEnabled()"
+      title="Toggle microphone"
+    >
+      {{ audioEnabled() ? '🎤' : '🔇' }}
+    </button>
+
+    <button
+      type="button"
+      class="icon-btn"
+      [class.icon-btn--off]="!videoEnabled()"
+      (click)="toggleVideo.emit()"
+      [attr.aria-pressed]="videoEnabled()"
+      title="Toggle camera"
+    >
+      {{ videoEnabled() ? '📷' : '🚫' }}
+    </button>
+
+    <button
+      type="button"
+      class="icon-btn"
+      [class.icon-btn--active]="isScreenSharing()"
+      (click)="toggleScreenShare.emit()"
+      [attr.aria-pressed]="isScreenSharing()"
+      title="Share your screen"
+    >
+      🖥️
+    </button>
+
+    <button
+      type="button"
+      class="icon-btn"
+      [class.icon-btn--active]="isStatsPanelOpen()"
+      (click)="toggleStats.emit()"
+      [attr.aria-pressed]="isStatsPanelOpen()"
+      title="Connection stats"
+    >
+      📊
+    </button>
+  </div>
+
+  <button type="button" class="btn btn--danger" (click)="leave.emit()">Leave</button>
+</div>

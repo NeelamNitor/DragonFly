@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+button {
+  font-family: inherit;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: #c9d1d9;
+
+  input,
+  select {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    background: #0d1117;
+    color: #e6edf3;
+
+    &:focus {
+      outline: 2px solid #2f6feb;
+      outline-offset: 1px;
+    }
+  }
+}
+
+.field__row {
+  display: flex;
+  gap: 0.5rem;
+
+  input {
+    flex: 1;
+  }
+}
+
+.field__error {
+  color: #f47067;
+}
+
+.btn {
+  padding: 0.65rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.btn--primary {
+  background: #2f6feb;
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: #4184f3;
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: #30363d;
+  color: #c9d1d9;
+
+  &:hover:not(:disabled) {
+    background: #1c2128;
+  }
+}
+
+.btn--danger {
+  background: #c0392b;
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: #d64434;
+  }
+}
+
+.icon-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: #21262d;
+  color: #e6edf3;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+
+  &:hover {
+    background: #30363d;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &--off {
+    background: #c0392b;
+
+    &:hover {
+      background: #d64434;
+    }
+  }
+
+  &--active {
+    background: #2f6feb;
+  }
+}

@@ -1,0 +1,33 @@
+<div class="tile" [class.tile--active-speaker]="participant().isActiveSpeaker">
+  <video
+    #videoEl
+    autoplay
+    playsinline
+    [muted]="participant().isLocal"
+    [class.tile__video--mirrored]="participant().isLocal && !participant().mediaState.screenSharing"
+    class="tile__video"
+  ></video>
+
+  @if (!participant().mediaState.videoEnabled && !participant().mediaState.screenSharing) {
+    <div class="tile__avatar">
+      <span>{{ participant().displayName.charAt(0).toUpperCase() }}</span>
+    </div>
+  }
+
+  <div class="tile__overlay">
+    <span class="tile__name">
+      {{ participant().displayName }}{{ participant().isLocal ? ' (You)' : '' }}
+    </span>
+    <div class="tile__status">
+      @if (!participant().mediaState.audioEnabled) {
+        <span class="tile__icon" title="Muted">🔇</span>
+      }
+      @if (participant().mediaState.screenSharing) {
+        <span class="tile__icon" title="Sharing screen">🖥️</span>
+      }
+      @if (!participant().isLocal) {
+        <app-connection-badge [quality]="participant().connectionQuality" />
+      }
+    </div>
+  </div>
+</div>

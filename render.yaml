@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: webrtc-signaling-server
+    runtime: node
+    rootDir: signaling-server
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: NODE_VERSION
+        value: 20

@@ -1,0 +1,74 @@
+.lobby {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: radial-gradient(circle at top, #1c2230, #0e1117 70%);
+}
+
+.lobby__card {
+  width: 100%;
+  max-width: 420px;
+  background: #161b22;
+  border: 1px solid #262c36;
+  border-radius: 16px;
+  padding: 1.75rem;
+  color: #e6edf3;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.lobby__title {
+  margin: 0 0 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.lobby__preview {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  margin-bottom: 1rem;
+}
+
+.lobby__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.lobby__video-off {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b949e;
+  font-size: 0.9rem;
+  background: #0d1117;
+}
+
+.lobby__preview-controls {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem;
+}
+
+.lobby__devices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.lobby__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
