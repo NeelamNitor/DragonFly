@@ -3,12 +3,16 @@ export const environment = {
   signalingUrl: 'wss://dragonfly-8cvf.onrender.com',
   iceServers: [
     { urls: ['stun:stun.l.google.com:19302'] },
-    // TODO: add a TURN server — required for two participants on different
-    // networks/locations behind strict NATs or firewalls, which STUN alone
-    // often cannot traverse. Get free testing credentials from a provider
-    // such as Metered.ca (Open Relay project), Twilio Network Traversal
-    // Service, or Xirsys, then uncomment and fill in:
-    // { urls: ['turn:your-turn-host:3478'], username: 'turn-user', credential: 'turn-pass' },
-    // { urls: ['turn:your-turn-host:3478?transport=tcp'], username: 'turn-user', credential: 'turn-pass' },
+    { urls: ['stun:stun.relay.metered.ca:80'] },
+    {
+      urls: ['turn:global.relay.metered.ca:80', 'turn:global.relay.metered.ca:80?transport=tcp', 'turn:global.relay.metered.ca:443'],
+      username: '65fad9e7014a8932477e1591',
+      credential: 'Iz3J6vfCwh9W209i',
+    },
+    {
+      urls: ['turns:global.relay.metered.ca:443?transport=tcp'],
+      username: '65fad9e7014a8932477e1591',
+      credential: 'Iz3J6vfCwh9W209i',
+    },
   ] as RTCIceServer[],
 };
