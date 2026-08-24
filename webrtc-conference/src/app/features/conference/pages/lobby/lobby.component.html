@@ -67,6 +67,9 @@
           <input type="text" formControlName="roomId" placeholder="room-code" autocomplete="off" />
           <button type="button" class="btn btn--ghost" (click)="regenerateRoomCode()">New</button>
         </div>
+        @if (form.controls.roomId.invalid && form.controls.roomId.touched) {
+          <small class="field__error">Enter a room code.</small>
+        }
       </label>
 
       <button type="submit" class="btn btn--primary" [disabled]="form.invalid">Join meeting</button>

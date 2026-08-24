@@ -21,7 +21,7 @@ export class LobbyComponent implements OnInit {
 
   protected readonly form = new FormGroup({
     displayName: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(2)] }),
-    roomId: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(3)] }),
+    roomId: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
 
   constructor() {
