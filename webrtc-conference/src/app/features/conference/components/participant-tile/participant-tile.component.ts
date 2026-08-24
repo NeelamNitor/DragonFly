@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, effect, input, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, effect, inject, input, viewChild } from '@angular/core';
 import { Participant } from '../../../../core/models/participant.model';
 import { ConnectionBadgeComponent } from '../connection-badge/connection-badge.component';
 
@@ -20,6 +20,17 @@ export class ParticipantTileComponent {
       const video = this.videoEl()?.nativeElement;
       if (video && video.srcObject !== stream) {
         video.srcObject = stream;
+      }
+    });
+
+    // Belt-and-braces: guarantee playback stops the instant this tile goes away
+    // (participant left, or we left), independent of how the underlying stream
+    // itself gets torn down.
+    inject(DestroyRef).onDestroy(() => {
+      const video = this.videoEl()?.nativeElement;
+      if (video) {
+        video.pause();
+        video.srcObject = null;
       }
     });
   }

@@ -113,7 +113,10 @@ export class WebRtcSessionService implements IMediaTransport {
     this.disconnectWatchdogs.forEach((timer) => clearTimeout(timer));
     this.disconnectWatchdogs.clear();
 
-    this.peers.forEach((entry) => entry.pc.close());
+    this.peers.forEach((entry) => {
+      this.stopPeerMedia(entry);
+      entry.pc.close();
+    });
     this.peers.clear();
 
     this.signaling.disconnect();
@@ -292,8 +295,21 @@ export class WebRtcSessionService implements IMediaTransport {
     const entry = this.peers.get(remoteId);
     if (!entry) return;
     this.clearWatchdog(remoteId);
+    this.stopPeerMedia(entry);
     entry.pc.close();
     this.peers.delete(remoteId);
+  }
+
+  /** Explicitly stops inbound tracks so remote audio/video can never keep playing
+   *  past a peer connection close, regardless of how quickly the UI removes the tile. */
+  private stopPeerMedia(entry: PeerEntry): void {
+    entry.pc.getReceivers().forEach((receiver) => {
+      try {
+        receiver.track?.stop();
+      } catch {
+        // already stopped/ended — ignore
+      }
+    });
   }
 
   private async attemptIceRestart(remoteId: string): Promise<void> {

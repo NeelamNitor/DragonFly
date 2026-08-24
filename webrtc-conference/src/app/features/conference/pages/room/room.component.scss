@@ -9,10 +9,12 @@
   flex: 1;
   display: flex;
   min-height: 0;
+  overflow: hidden;
 }
 
 .room__grid {
   flex: 1;
   min-width: 0;
+  min-height: 0;
   display: flex;
 }

@@ -1,10 +1,15 @@
 .video-grid {
   display: grid;
   grid-template-columns: repeat(var(--grid-columns, 2), minmax(0, 1fr));
+  // Rows share the container's height equally instead of being sized by each
+  // tile's intrinsic aspect-ratio — otherwise 3+ participants can make the
+  // grid's content taller than the viewport, overflowing past the controls
+  // bar below it (it was clipped/hidden, not actually missing).
+  grid-auto-rows: minmax(0, 1fr);
   gap: 0.75rem;
   width: 100%;
   height: 100%;
-  align-content: center;
+  overflow: hidden;
   padding: 1rem;
 
   @media (max-width: 720px) {
