@@ -71,6 +71,8 @@ export class ConferenceStore {
   private patchParticipant(id: string, patch: Partial<Participant>): void {
     const current = this.participantsMap().get(id);
     if (!current) return;
+    const hasChanges = (Object.keys(patch) as (keyof Participant)[]).some((key) => current[key] !== patch[key]);
+    if (!hasChanges) return;
     this.updateMap((map) => map.set(id, { ...current, ...patch }));
   }
 

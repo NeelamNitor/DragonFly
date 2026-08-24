@@ -16,9 +16,13 @@ export const WEBRTC_CONFIG = {
       autoGainControl: true,
     },
     video: {
-      width: { ideal: 1280, max: 1920 },
-      height: { ideal: 720, max: 1080 },
-      frameRate: { ideal: 30, max: 30 },
+      // 480p/24fps by default — a full-mesh call encodes/decodes one stream per
+      // remote participant in software on most machines, so this keeps CPU load
+      // reasonable even on modest hardware. Raise toward 1280x720/30 once you've
+      // confirmed target devices have headroom (or once tracks are SFU-routed).
+      width: { ideal: 640, max: 1280 },
+      height: { ideal: 480, max: 720 },
+      frameRate: { ideal: 24, max: 30 },
       facingMode: 'user',
     },
   } satisfies MediaStreamConstraints,
