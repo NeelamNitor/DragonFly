@@ -1,8 +1,6 @@
 export const environment = {
   production: true,
-  // TODO: replace with your deployed signaling server's wss:// URL
-  // (e.g. after deploying signaling-server/ to Render: wss://webrtc-signaling-server.onrender.com)
-  signalingUrl: 'wss://your-signaling-server.example.com',
+  signalingUrl: 'wss://dragonfly-8cvf.onrender.com',
   iceServers: [
     { urls: ['stun:stun.l.google.com:19302'] },
     // TODO: add a TURN server — required for two participants on different
